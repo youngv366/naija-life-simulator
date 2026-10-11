@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101b2d">
+<title>Naija Life Simulator — Survive the Hustle</title>
+<style>
+:root{--bg:#0b1220;--panel:#121e31;--panel2:#182840;--text:#f4f7fb;--muted:#aab8ca;--green:#a7f36b;--gold:#ffd166;--red:#ff7777;--line:#2a3a52}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0%,#1d3550 0,#0b1220 48%);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+main{width:min(100%,760px);margin:auto;padding:20px 16px 44px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.brand{font-weight:900;letter-spacing:.02em}.brand span{color:var(--green)}.pill{border:1px solid var(--line);border-radius:999px;padding:5px 10px;color:var(--muted);font-size:12px}
+.hero{padding:26px 22px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,#1a2d45,#101b2d);position:relative;overflow:hidden}.eyebrow{color:var(--green);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800}.hero h1{font-size:clamp(2rem,8vw,3.6rem);line-height:1.02;letter-spacing:-.04em;margin:10px 0 12px}.hero p{color:var(--muted);max-width:540px;margin:0 0 20px}.hero-art{font-size:clamp(2.3rem,10vw,4.6rem);letter-spacing:5px;margin-bottom:8px;filter:drop-shadow(0 8px 14px #0006)}
+button,input{font:inherit}button{cursor:pointer;border:0;border-radius:13px;padding:13px 16px;font-weight:800;transition:transform .12s,opacity .12s}button:active{transform:scale(.98)}button:disabled{opacity:.4;cursor:not-allowed}.primary{background:var(--green);color:#14220d}.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}.quiet{background:transparent;color:var(--muted);border:1px solid var(--line)}.wide{width:100%}.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}.stat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:13px}.stat small{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:clamp(1rem,4vw,1.4rem);margin-top:3px}.stat .money{color:var(--green)}.meter{height:6px;background:#26364c;border-radius:99px;overflow:hidden;margin-top:7px}.meter i{display:block;height:100%;background:var(--green);border-radius:99px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:14px}.card h2{margin:0 0 6px;font-size:1.35rem}.muted{color:var(--muted)}.dayline{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.day{color:var(--green);font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.scene{font-size:1.08rem;margin:10px 0 18px}.choices{display:grid;gap:10px}.choice{text-align:left;display:flex;gap:12px;align-items:flex-start;background:var(--panel2);color:var(--text);border:1px solid #31435c;padding:14px}.choice:hover{border-color:var(--green)}.choice b{display:block;margin-bottom:2px}.choice small{display:block;color:var(--muted);font-weight:500}.choice .num{flex:0 0 30px;height:30px;border-radius:9px;background:#263951;display:grid;place-items:center;color:var(--green)}
+.feedback{margin-top:14px;border-radius:14px;padding:13px;background:#0e1828;border:1px solid var(--line)}.feedback strong{display:block;margin-bottom:4px}.feedback p{margin:0;color:var(--muted)}
+.progress{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:14px 0}.progress span{height:5px;border-radius:99px;background:#29374b}.progress span.done{background:var(--green)}
+.result{background:linear-gradient(135deg,#1a2e44,#101a2b);border:1px solid #40546b;border-radius:22px;padding:22px;text-align:center;margin-top:14px}.result .emoji{font-size:3rem}.result h2{font-size:2rem;margin:5px 0}.result .big{font-size:2rem;color:var(--green);font-weight:900}.result p{color:var(--muted)}.resultbox{border:1px dashed #526982;border-radius:14px;padding:14px;margin:14px 0;text-align:left;white-space:pre-line}
+footer{margin-top:22px;text-align:center;color:#8293a9;font-size:12px}.hidden{display:none!important}.nameinput{width:100%;background:#0d1726;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:13px;margin:8px 0 14px;outline-color:var(--green)}
+@media(min-width:600px){main{padding-top:28px}.hero{padding:34px}.card{padding:24px}.stats{gap:12px}}
+</style>
+</head>
+<body>
+<main>
+  <div class="top"><div class="brand">NAIJA LIFE <span>SIMULATOR</span></div><div class="pill">BETA · LAGOS</div></div>
+  <section id="intro" class="hero">
+    <div class="hero-art" aria-hidden="true">🚕 🏙️ 💸</div>
+    <div class="eyebrow">A seven-day money challenge</div>
+    <h1>Survive the<br>Hustle.</h1>
+    <p>Lagos is moving. Bills are waiting. You have <b>₦5,000</b> and seven days to make decisions that shape your money, happiness and reputation. Every choice has a trade-off.</p>
+    <label for="nickname" class="muted">What should we call you?</label>
+    <input id="nickname" class="nameinput" maxlength="18" placeholder="Enter a nickname (optional)" autocomplete="nickname">
+    <button class="primary wide" id="startBtn">Start my 7 days →</button>
+    <p class="muted" style="font-size:12px;margin:12px 0 0">This is a fictional game. No real money is involved.</p>
+  </section>
+
+  <section id="game" class="hidden">
+    <div class="stats">
+      <div class="stat"><small>💵 CASH</small><strong id="cash" class="money">₦5,000</strong><div class="meter"><i id="cashbar" style="width:50%"></i></div></div>
+      <div class="stat"><small>💚 HAPPINESS</small><strong id="happy">60/100</strong><div class="meter"><i id="happybar" style="width:60%"></i></div></div>
+      <div class="stat"><small>🤝 REPUTATION</small><strong id="rep">50/100</strong><div class="meter"><i id="repbar" style="width:50%"></i></div></div>
+    </div>
+    <div class="progress" id="progress" aria-label="Seven-day progress"></div>
+    <article class="card">
+      <div class="dayline"><span class="day" id="daylabel">DAY 1 OF 7</span><span class="pill" id="location">Yaba, Lagos</span></div>
+      <h2 id="title">The morning rush</h2>
+      <p class="scene" id="scene"></p>
+      <div class="choices" id="choices"></div>
+      <div id="feedback" class="feedback hidden" aria-live="polite"><strong id="feedbackTitle"></strong><p id="feedbackText"></p><button id="nextBtn" class="primary wide" style="margin-top:12px">Continue →</button></div>
+    </article>
+    <div class="row" style="margin-top:12px"><button class="quiet" id="restartBtn">Restart game</button><button class="secondary" id="saveBtn">Save progress</button></div>
+  </section>
+
+  <section id="ending" class="hidden">
+    <div class="result">
+      <div class="eyebrow">YOUR LAGOS STORY</div><div class="emoji" id="endEmoji">🏙️</div>
+      <h2 id="endTitle">The Comeback</h2><p id="endDesc"></p>
+      <div class="big" id="endCash">₦0</div>
+      <p id="endStats"></p>
+      <div class="resultbox" id="shareText"></div>
+      <div class="row"><button class="primary" id="shareBtn">Share my result ↗</button><button class="secondary" id="copyBtn">Copy result</button></div>
+      <p style="font-size:12px;margin-bottom:0">Tag a friend and challenge them to survive their own seven days.</p>
+    </div>
+    <div class="card"><h2>Try a different strategy</h2><p class="muted">Each run can end differently. Try protecting your happiness, building your reputation, or taking calculated risks.</p><button class="primary wide" id="playAgainBtn">Play again</button></div>
+  </section>
+  <footer>Naija Life Simulator · Survive the Hustle · Early playable prototype</footer>
+</main>
+<script>
+const DAYS = [
+ {day:"Day 1",loc:"Yaba, Lagos",title:"The morning rush",scene:"You need to get to a job interview by 9 a.m. The bus is cheaper, but traffic is unpredictable. A ride-hailing trip costs more but saves time.",choices:[
+  {label:"Take the bus",detail:"Spend less, risk arriving late.",cash:-500,happy:-2,rep:0,feedback:"You saved some cash, but the traffic tested your patience."},
+  {label:"Pay for a ride",detail:"Protect your time, spend more.",cash:-1800,happy:4,rep:3,feedback:"You arrived early and made a confident first impression."},
+  {label:"Walk part of the way, then take a bus",detail:"A compromise between money and time.",cash:-800,happy:1,rep:1,feedback:"You balanced your budget and arrived just in time."}]},
+ {day:"Day 2",loc:"Ikeja, Lagos",title:"Lunch or liquidity?",scene:"It's lunchtime. You have been outside since morning and you're hungry. A filling meal costs ₦1,500; a smaller meal costs ₦700.",choices:[
+  {label:"Buy the filling meal",detail:"Spend more to recharge properly.",cash:-1500,happy:8,rep:0,feedback:"A proper meal helped you reset for the afternoon."},
+  {label:"Buy the smaller meal",detail:"Keep more money for the week.",cash:-700,happy:3,rep:0,feedback:"You ate enough to keep moving and protected your cash."},
+  {label:"Skip lunch",detail:"Keep the money, accept the discomfort.",cash:0,happy:-12,rep:0,feedback:"You kept your cash, but your energy and mood took a hit."}]},
+ {day:"Day 3",loc:"Surulere, Lagos",title:"A friend has a plan",scene:"A friend says you can make quick money by paying a ₦2,000 'registration fee' for an opportunity. They cannot explain the work clearly.",choices:[
+  {label:"Pay the fee",detail:"Take a risk on a promise.",cash:-2000,happy:-4,rep:-2,feedback:"The details stayed vague. In real life, verify opportunities and never pay for a guaranteed job."},
+  {label:"Ask for proof and details first",detail:"Check the offer before committing.",cash:0,happy:1,rep:4,feedback:"You protected your money and showed good judgement."},
+  {label:"Decline and look for verified work",detail:"Avoid the uncertainty and keep searching.",cash:0,happy:0,rep:2,feedback:"You avoided a risky offer and stayed focused on reliable options."}]},
+ {day:"Day 4",loc:"Lekki, Lagos",title:"The side-hustle choice",scene:"Someone needs a quick design for a small business flyer. You can do it tonight for ₦4,000, but you will have less time to rest.",choices:[
+  {label:"Accept and deliver tonight",detail:"Earn extra cash, sacrifice some rest.",cash:4000,happy:-6,rep:5,feedback:"You delivered on time, earned money and built trust—though you are tired."},
+  {label:"Negotiate a realistic deadline",detail:"Protect quality and your energy.",cash:2500,happy:1,rep:4,feedback:"You agreed on a fair deadline and still earned a useful fee."},
+  {label:"Decline politely",detail:"Protect your rest and current commitments.",cash:0,happy:5,rep:1,feedback:"Rest matters too. You kept your energy for the next opportunity."}]},
+ {day:"Day 5",loc:"Ojuelegba, Lagos",title:"Your phone is acting up",scene:"Your phone battery is failing. A trusted repairer offers a basic fix for ₦2,500. A flashy replacement is available on credit, but the terms are unclear.",choices:[
+  {label:"Repair the phone",detail:"Pay once for a practical fix.",cash:-2500,happy:2,rep:1,feedback:"Your phone works again without a new debt hanging over you."},
+  {label:"Take the replacement on unclear credit terms",detail:"Get a new phone now, accept future uncertainty.",cash:-1000,happy:3,rep:-3,feedback:"The upfront cost looks low, but unclear credit terms can become expensive. Always read the agreement."},
+  {label:"Use power-saving mode and wait",detail:"Spend nothing today; manage the limitation.",cash:0,happy:-3,rep:0,feedback:"You bought yourself time, but you will need a plan if the battery gets worse."}]},
+ {day:"Day 6",loc:"Victoria Island, Lagos",title:"Family needs help",scene:"A relative calls with an urgent request for ₦1,000. You want to help, but you also need money for tomorrow.",choices:[
+  {label:"Send ₦1,000",detail:"Support family and tighten your budget.",cash:-1000,happy:4,rep:3,feedback:"You showed up for family. Now plan the rest of your spending carefully."},
+  {label:"Send ₦500 and explain your limit",detail:"Help within your means.",cash:-500,happy:2,rep:2,feedback:"You helped while being honest about what you could afford."},
+  {label:"Explain that you cannot send money today",detail:"Protect essentials and communicate respectfully.",cash:0,happy:-2,rep:1,feedback:"Setting a boundary can feel uncomfortable, but honest communication matters."}]},
+ {day:"Day 7",loc:"Third Mainland Bridge",title:"The final decision",scene:"You have one day left. A small business offers you a paid task, but it requires transport and a little upfront spending. You can take it, seek a safer option, or rest and plan your next move.",choices:[
+  {label:"Take the calculated risk",detail:"Spend ₦1,000 to pursue a ₦3,500 task.",cash:2500,happy:-2,rep:3,feedback:"You checked the details, took a measured risk and completed the task."},
+  {label:"Choose a verified, lower-paying task",detail:"Earn ₦1,500 with no upfront cost.",cash:1500,happy:1,rep:2,feedback:"A modest, verified opportunity gave you a predictable result."},
+  {label:"Rest and plan the next week",detail:"No new income today; recover your energy.",cash:0,happy:7,rep:0,feedback:"You ended the week rested, with a clearer plan for what comes next."}]}
+];
+const initial = () => ({day:0,cash:5000,happy:60,rep:50,name:"",history:[],finished:false});
+let state = initial();
+const $ = id => document.getElementById(id);
+const money = n => "₦" + Math.round(n).toLocaleString("en-NG");
+function clamp(n,min=0,max=100){return Math.max(min,Math.min(max,n))}
+function safeSave(){try{localStorage.setItem("naijaLifeSave",JSON.stringify(state));return true}catch(e){return false}}
+function loadSave(){try{const s=localStorage.getItem("naijaLifeSave");return s?JSON.parse(s):null}catch(e){return null}}
+function show(section){["intro","game","ending"].forEach(id=>$(id).classList.toggle("hidden",id!==section))}
+function renderStats(){
+ $("cash").textContent=money(state.cash);$("happy").textContent=state.happy+"/100";$("rep").textContent=state.rep+"/100";
+ $("cashbar").style.width=clamp(state.cash,0,10000)/100+"%";$("happybar").style.width=state.happy+"%";$("repbar").style.width=state.rep+"%";
+ $("progress").innerHTML=DAYS.map((d,i)=>`<span class="${i<state.day?'done':''}"></span>`).join("");
+}
+function renderDay(){
+ const d=DAYS[state.day];renderStats();
+ $("daylabel").textContent=`DAY ${state.day+1} OF 7`;$("location").textContent=d.loc;$("title").textContent=d.title;$("scene").textContent=d.scene;
+ $("feedback").classList.add("hidden");
+ $("choices").innerHTML="";
+ d.choices.forEach((c,i)=>{const b=document.createElement("button");b.className="choice";b.innerHTML=`<span class="num">${String.fromCharCode(65+i)}</span><span><b>${c.label}</b><small>${c.detail}</small></span>`;b.addEventListener("click",()=>choose(i));$("choices").appendChild(b)});
+ show("game");
+}
+function choose(i){
+ const d=DAYS[state.day],c=d.choices[i];
+ state.cash=Math.max(0,state.cash+c.cash);state.happy=clamp(state.happy+c.happy);state.rep=clamp(state.rep+c.rep);
+ state.history.push({day:state.day+1,choice:c.label,cash:c.cash,happy:c.happy,rep:c.rep,feedback:c.feedback});
+ $("choices").querySelectorAll("button").forEach(b=>b.disabled=true);
+ $("feedbackTitle").textContent=c.cash>0?`You gained ${money(c.cash)}.`:c.cash<0?`You spent ${money(Math.abs(c.cash))}.`:"No money changed hands.";
+ $("feedbackText").textContent=c.feedback;
+ $("nextBtn").textContent=state.day===6?"See my result →":"Continue to next day →";
+ $("feedback").classList.remove("hidden");renderStats();safeSave();
+}
+function endingData(){
+ let title,emoji,desc;
+ if(state.cash>=8000 && state.happy>=45){title="The Smart Hustler";emoji="🧠";desc="You kept your head, made useful moves and finished the week with options."}
+ else if(state.cash>=4000 && state.rep>=60){title="The Rising Connector";emoji="🤝";desc="Your choices built trust. You may not have everything yet, but your reputation is opening doors."}
+ else if(state.happy>=70){title="The Balanced Life";emoji="🌿";desc="You protected your wellbeing. Your next challenge is turning that energy into a stronger financial plan."}
+ else if(state.cash<2000){title="The Comeback Loading";emoji="🔋";desc="The week was expensive. You still have lessons, and your next run can be smarter."}
+ else if(state.rep<35){title="The Risk Taker";emoji="🎲";desc="You chased quick wins. Next time, verify offers and think about the long-term cost."}
+ else {title="The Lagos Survivor";emoji="🏙️";desc="You made it through seven days. You learned to balance cash, wellbeing and trust in a city that never slows down."}
+ return {title,emoji,desc};
+}
+function finish(){
+ state.finished=true;safeSave();const e=endingData();$("endEmoji").textContent=e.emoji;$("endTitle").textContent=e.title;$("endDesc").textContent=e.desc;$("endCash").textContent=money(state.cash);$("endStats").textContent=`Happiness: ${state.happy}/100 · Reputation: ${state.rep}/100`;
+ const name=state.name?state.name:"A Lagos player";
+ const result=`I survived 7 days in Naija Life Simulator: Survive the Hustle!\nPlayer: ${name}\nEnding: ${e.title}\nCash left: ${money(state.cash)}\nHappiness: ${state.happy}/100\nReputation: ${state.rep}/100\nCan you beat my result?`;
+ $("shareText").textContent=result;show("ending");
+}
+function start(){state=initial();state.name=$("nickname").value.trim().slice(0,18);safeSave();renderDay()}
+function restart(){if(confirm("Restart the game? Your current run will be lost.")){state=initial();try{localStorage.removeItem("naijaLifeSave")}catch(e){}$("nickname").value="";show("intro")}}
+$("startBtn").addEventListener("click",start);
+$("nextBtn").addEventListener("click",()=>{if(state.day>=6)finish();else{state.day++;renderDay()}});
+$("restartBtn").addEventListener("click",restart);$("playAgainBtn").addEventListener("click",()=>{state=initial();$("nickname").value="";show("intro")});
+$("saveBtn").addEventListener("click",()=>{const ok=safeSave();$("saveBtn").textContent=ok?"Saved ✓":"Save unavailable";setTimeout(()=>$("saveBtn").textContent="Save progress",1400)});
+async function shareResult(){
+ const text=$("shareText").textContent;
+ if(navigator.share){try{await navigator.share({title:"My Naija Life Simulator result",text});return}catch(e){if(e.name==="AbortError")return}}
+ copyResult();
+}
+async function copyResult(){const text=$("shareText").textContent;try{await navigator.clipboard.writeText(text);$("copyBtn").textContent="Copied ✓";setTimeout(()=>$("copyBtn").textContent="Copy result",1500)}catch(e){const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");$("copyBtn").textContent="Copied ✓"}catch(err){alert("Copy this result:\n\n"+text)}ta.remove();setTimeout(()=>$("copyBtn").textContent="Copy result",1500)}}
+$("shareBtn").addEventListener("click",shareResult);$("copyBtn").addEventListener("click",copyResult);
+const saved=loadSave();
+if(saved && saved.day>=0 && saved.day<7 && !saved.finished && Array.isArray(saved.history)){
+ const resume=document.createElement("button");resume.className="secondary wide";resume.style.marginTop="10px";resume.textContent="Resume saved game";
+ resume.addEventListener("click",()=>{state=saved;$("nickname").value=state.name||"";renderDay()});$("intro").appendChild(resume);
+}
+</script>
+</body>
+</html>
